@@ -14,8 +14,9 @@ SaaSAgent is a multi-tenant B2B SaaS platform for creating and managing AI-power
     │   ├── Domain               # Core domain entities and enums
     │   ├── Infrastructure       # EF Core persistence, identity, DI setup
     │   └── SaaSAgent.sln        # Solution referencing all backend projects
-    └── frontend
-        └── (coming soon)        # Angular 17+ application
+    └── frontend                 # Angular 17 + Tailwind CSS SaaS experience
+        ├── package.json         # Front-end dependencies & scripts
+        └── src                  # Standalone component based UI implementation
 ```
 
 ## Backend Highlights
