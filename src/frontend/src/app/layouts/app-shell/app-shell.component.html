@@ -1,0 +1,112 @@
+<div class="flex min-h-screen">
+  <!-- Mobile backdrop -->
+  <div
+    class="fixed inset-0 z-30 bg-gray-900/40 backdrop-blur-sm transition-opacity lg:hidden"
+    *ngIf="sidebarOpen()"
+    (click)="closeSidebar()"
+  ></div>
+
+  <!-- Sidebar -->
+  <aside
+    class="fixed inset-y-0 left-0 z-40 w-72 transform border-r border-gray-200 bg-white p-6 shadow-xl transition-transform lg:static lg:translate-x-0"
+    [class.-translate-x-full]="!sidebarOpen()"
+  >
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-500 text-white shadow-soft">
+          <mat-icon>auto_awesome</mat-icon>
+        </div>
+        <div>
+          <p class="text-lg font-semibold">SaaS Agent</p>
+          <p class="text-sm text-gray-500">AI Digital Twins</p>
+        </div>
+      </div>
+      <button type="button" mat-icon-button class="lg:hidden" (click)="closeSidebar()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <nav class="mt-10 flex flex-col gap-1">
+      <a
+        *ngFor="let item of navigation()"
+        [routerLink]="item.route"
+        routerLinkActive="bg-primary-50 text-primary-600"
+        class="group flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium text-gray-600 transition hover:bg-gray-100 hover:text-gray-900"
+        [routerLinkActiveOptions]="{ exact: true }"
+        (click)="closeSidebar()"
+      >
+        <div
+          class="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-100 bg-gray-50 text-primary-600 transition group-hover:border-primary-100 group-hover:bg-primary-50"
+        >
+          <mat-icon>{{ item.icon }}</mat-icon>
+        </div>
+        <span class="flex-1">{{ item.label }}</span>
+        <span *ngIf="item.badge" class="rounded-full bg-primary-100 px-2 py-0.5 text-xs text-primary-600">{{ item.badge }}</span>
+      </a>
+    </nav>
+
+    <div *ngIf="upgradeBannerVisible()" class="mt-8 rounded-2xl bg-gradient-to-br from-primary-500 to-primary-700 p-6 text-white shadow-soft">
+      <p class="text-sm uppercase tracking-wide text-primary-100">Free trial</p>
+      <p class="mt-2 text-lg font-semibold">{{ trialDaysRemaining() }} days left</p>
+      <p class="mt-2 text-sm text-primary-100">Unlock more agents and unlimited interactions with the Pro plan.</p>
+      <a
+        routerLink="/pricing"
+        class="mt-4 inline-flex items-center gap-2 rounded-xl bg-white px-4 py-2 text-sm font-semibold text-primary-600 shadow-sm transition hover:scale-[1.02]"
+      >
+        Upgrade to Pro
+        <mat-icon class="!text-base">arrow_forward</mat-icon>
+      </a>
+    </div>
+
+    <div class="mt-10 border-t border-gray-200 pt-6">
+      <div class="flex items-center gap-3">
+        <div class="flex h-12 w-12 items-center justify-center rounded-full bg-primary-100 text-primary-600 font-semibold">
+          JD
+        </div>
+        <div class="min-w-0 flex-1">
+          <p class="truncate text-sm font-semibold">Jane Doe</p>
+          <p class="truncate text-xs text-gray-500">jane.doe@acme.com</p>
+        </div>
+        <button mat-icon-button [matMenuTriggerFor]="profileMenu">
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #profileMenu="matMenu">
+          <button mat-menu-item routerLink="/settings">Account settings</button>
+          <button mat-menu-item>Logout</button>
+        </mat-menu>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Content area -->
+  <div class="flex min-h-screen flex-1 flex-col lg:pl-72">
+    <header class="sticky top-0 z-20 border-b border-gray-200 bg-white/80 backdrop-blur">
+      <div class="flex items-center justify-between px-6 py-4">
+        <div class="flex items-center gap-3">
+          <button type="button" mat-icon-button class="lg:hidden" (click)="toggleSidebar()">
+            <mat-icon>menu</mat-icon>
+          </button>
+          <div>
+            <p class="text-xs font-semibold uppercase tracking-[0.2em] text-primary-600">AI Control Center</p>
+            <h1 class="text-2xl font-semibold text-gray-900">Welcome back, Jane</h1>
+            <p class="text-sm text-gray-500">Here is what's happening with your AI agents today.</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button mat-stroked-button color="primary" routerLink="/agents/create" class="!rounded-xl !border-primary-200 !bg-white !px-4 !py-2 !text-sm !font-semibold">
+            Create Agent
+          </button>
+          <button mat-flat-button color="primary" routerLink="/pricing" class="!rounded-xl !bg-primary-600 !px-4 !py-2 !text-sm !font-semibold !shadow-soft">
+            Upgrade Plan
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="flex-1 px-4 pb-12 pt-6 sm:px-6 lg:px-10">
+      <div class="page-enter">
+        <router-outlet />
+      </div>
+    </main>
+  </div>
+</div>

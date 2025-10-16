@@ -1,0 +1,7 @@
+:host {
+  display: block;
+}
+
+mat-icon {
+  font-variation-settings: 'FILL' 0, 'wght' 500;
+}
