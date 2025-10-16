@@ -59,29 +59,9 @@ The API uses `appsettings.json` for configuration. Set the following environment
 - `AzureAd__ClientSecret`
 - `AzureAd__TenantId`
 
-## Front-end Highlights
-
-- **Angular 17 standalone** application styled with **Tailwind CSS** and **Angular Material** components for a modern SaaS feel.
-- Comprehensive page coverage including onboarding flow, dashboard analytics, agent management, billing, pricing, settings, and help center.
-- **ApexCharts** powered dashboards with mock usage data to visualize agent interactions.
-- Responsive sidebar layout with micro-interactions, skeleton-ready patterns, and enterprise-grade empty/error states.
-- Organized by standalone pages that can be wired to the API once endpoints are available.
-
-### Running the Front-end
-
-1. Install dependencies:
-   ```bash
-   cd src/frontend
-   npm install
-   ```
-2. Start the development server:
-   ```bash
-   npm start
-   ```
-3. Open `http://localhost:4200` to explore the UI. Environment variables for MSAL and API endpoints can be configured via Angular environments.
-
 ## Next Steps
 
+- Scaffold the Angular 17 front-end with Tailwind CSS, Angular Material/PrimeNG, and MSAL.js integration.
 - Implement command/query handlers, validation, and background services in the Application layer.
 - Add persistence migrations, seed data, and comprehensive API controllers for onboarding, agents, billing, and usage management.
 - Integrate Stripe for subscription billing and Microsoft Graph for organizational data access.
